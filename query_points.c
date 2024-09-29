@@ -7,9 +7,9 @@ int main() {
     MYSQL_RES *res;
     MYSQL_ROW row;
     char *server = "localhost";
-    char *user = "root";  // Replace "root" with your MySQL username
-    char *password = "password";  // Replace with your MySQL password
-    char *database = "Game";  // The database you are using
+    char *user = "root";  
+    char *password = "mysql";  
+    char *database = "Game";  
 
     conn = mysql_init(NULL);
 
@@ -26,10 +26,10 @@ int main() {
     }
 
     // Executing the query to retrieve the winner or the points from a specific game
-    if (mysql_query(conn, "SELECT Player.Name, PlayerGames.PointsGame "
+    if (mysql_query(conn, "SELECT Player.Name, PlayerGame.PointsGame "
                           "FROM Player "
-                          "JOIN PlayerGames ON Player.Id = PlayerGames.Player "
-                          "JOIN Games ON PlayerGames.Games = Games.Id "
+                          "JOIN PlayerGame ON Player.Id = PlayerGame.Player "
+                          "JOIN Games ON PlayerGame.Games = Games.Id "
                           "WHERE Games.Id = 1;")) {
         fprintf(stderr, "%s\n", mysql_error(conn));
         mysql_close(conn);
